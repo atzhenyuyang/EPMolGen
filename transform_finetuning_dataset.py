@@ -39,9 +39,9 @@ class CrossDocked2020(object):
                 return None
         else:
             ligand_dict = lig.to_dict()
-        if self.only_backbone:   # 如果只考虑 backbone 的原子
+        if self.only_backbone:   
             pocket_dict = Protein(pocket_file).get_backbone_dict(removeHs=False)
-        else:                    # 如果不只考虑 backbone 的原子
+        else:                    
             pocket_dict = Protein(pocket_file, topo_info = topo_dict).get_atom_dict(removeHs=False) 
         #ligand_dict = parse_sdf_to_dict(ligand_fn)
         data = ComplexData.from_protein_ligand_dicts(
@@ -51,8 +51,6 @@ class CrossDocked2020(object):
         data.protein_filename = '/'.join(pocket_file.split('/')[-2:])
         data.ligand_filename = '/'.join(ligand_file.split('/')[-2:])
         return data
-        #except:
-            #return None
     
     def run(self, dataset_name='crossdocked_pocket10_processed.lmdb', lmdb_path=None, 
             max_ligand_atom=50, only_backbone=False, n_process=1, interval=2000):
@@ -80,7 +78,7 @@ class CrossDocked2020(object):
             else:
                 raw_files = self.index[idx:idx+interval]
             val_raw_files = []
-            for items in raw_files:                  # 排除掉一些数据
+            for items in raw_files:                  
                 '''if items[0] is None:
                     continue'''
                 if 'ATOM' not in open(items[0]).read():
@@ -158,14 +156,12 @@ def check_index_file(index_file_path):
 cs2020 = CrossDocked2020(
     'fine-tuning_dataset',
     './index.pkl')
-# '/DATA/jyy/CrossDocked2020/Refine_Positive_Samples_New.types'
 cs2020.run(
     dataset_name='./fine-tuning_dataset.lmdb',
     max_ligand_atom=40,
     only_backbone=False,
     lmdb_path=None
     )
-######################################  运行准备数据集的代码 ##################################################
 
 
 
