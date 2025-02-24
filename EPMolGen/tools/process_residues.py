@@ -51,7 +51,7 @@ def GET_RESIDUES_PROP():
             ix_class = int(re.search('\d+', p)[0]) - 1
             out[res_name][heads[ix_p]] = ix_class
             if p == 'Physicochemical':
-                continue   # Physicochemical的属性与Chemical有重合
+                continue   
             else:
                 one_hot = np.zeros(n_classes[ix_p], dtype=np.int64)
                 one_hot[ix_class] = 1
