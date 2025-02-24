@@ -28,13 +28,7 @@ AMINO_ACID_TYPE = {
     'TYR':19
     }
 
-'''
-Asx、B可代表天冬氨酸(Asp、D)或天冬酰胺(Asn、N)。
-Glx、Z可代表谷氨酸(Glu、E)或谷氨酰胺(Gln、Q)。
-Xle、J可代表亮氨酸(Leu、L)或异亮氨酸(Ile、I)。
-Xaa(亦用Unk)、X可代表任意氨基酸或未知氨基酸。
-https://www.jianshu.com/p/7a3e93b15cfd
-'''
+
 AMINO_ACID_MAP = {
     'ALA':'A', 'ARG':'R', 'ASN':'N', 'ASP':'D', 'CYS':'C', 'GLN':'Q', 'GLU':'E',
     'GLY':'G', 'HIS':'H', 'ILE':'I', 'LEU':'L', 'LYS':'K', 'MET':'M', 'PHE':'F',
@@ -42,7 +36,7 @@ AMINO_ACID_MAP = {
     'HID':'H', 'HIE':'H', 'HIP':'H', 'SEC':'U', 'HYP':'O', 'GLP':'E', 'ASX':'B',
     'GLX':'Z', 'XLE':'J', 'XAA':'X', 'GLH':'G', 'ASH':'D', 'SE':'S'
     }
-# electronegativity
+
 EN = {'H':2.2, 'D':2.2, 'He':0, 'Li':0.98, 'Be':1.57, 'B':2.04, 'C':2.55, 'N':3.04, 'O':3.44, 'F':3.98, 'Ne':0.,
       'Na':0.93, 'Mg':1.31, 'Al':1.61, 'Si':1.98, 'P':2.19, 'S':2.58, 'Cl':3.16, 'Ar':0., 'K':0.82, 'Ca':1., 
       'Sc':1.36, 'Ti':1.54, 'V':1.63, 'Cr':1.66, 'Mn':1.55, 'Fe':1.83, 'Co':1.88, 'Ni':1.92, 'Cu':1.9, 'Zn':1.65,
@@ -556,9 +550,6 @@ class Chain(object):
         return bond_index, bond_type
     
     def get_atom_dict(self, removeHs=True, get_surf=False):
-        """
-        当前版本removeHs必须为True, 因为schrodinger对氨基酸H原子的命名跟一般情况不同。
-        """
         atom_dict = {
             'element': [],
             'pos': [],
