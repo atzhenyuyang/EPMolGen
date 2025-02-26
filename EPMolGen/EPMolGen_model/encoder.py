@@ -40,24 +40,11 @@ class ContextEncoder(nn.Module):
     @property
     def out_vec(self):
         return self.hidden_channels[1]
-
-    """def forward(self, node_attr, pos, edge_index, edge_feature, annealing=True):
-
-        edge_vector = pos[edge_index[0]] - pos[edge_index[1]]
-        edge_dist = torch.norm(edge_vector, dim=-1, p=2)
-        h = list(node_attr)
-        for interaction in self.interactions:
-            delta_h = interaction(h, edge_index, edge_feature, edge_vector, edge_dist, annealing=annealing)
-            h[0] = h[0] + delta_h[0]
-            h[1] = h[1] + delta_h[1]
-        return h"""
     
-##############################################  Code change place ####################################################
-    def forward(self, node_attr, pos, #idx_ligand_ctx_in_cpx, cpx_charge_pos, cpx_charge,
-                edge_index, edge_feature, annealing=True, attn_bias=None):
+    def forward(self, node_attr, pos, edge_index, edge_feature, annealing=True, attn_bias=None):
 
-        edge_vector = pos[edge_index[0]] - pos[edge_index[1]] # 两个坐标之间的距离向量
-        edge_dist = torch.norm(edge_vector, dim=-1, p=2)      # 计算两个坐标之间的距离
+        edge_vector = pos[edge_index[0]] - pos[edge_index[1]] 
+        edge_dist = torch.norm(edge_vector, dim=-1, p=2)     
         #h = list(node_attr)
         for interaction in self.interactions:
             node_attr = interaction(
@@ -71,4 +58,4 @@ class ContextEncoder(nn.Module):
                 )
         return node_attr
     
-    #########################################  code change place  ##########################################################
+   
