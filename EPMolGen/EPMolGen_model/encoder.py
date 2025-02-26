@@ -12,8 +12,8 @@ class ContextEncoder(nn.Module):
         super(ContextEncoder, self).__init__()
         self.hidden_channels = hidden_channels
         self.edge_channels = edge_channels
-        self.key_channels = key_channels  # not use
-        self.num_heads = num_heads  # not use
+        self.key_channels = key_channels  
+        self.num_heads = num_heads  
         self.num_interactions = num_interactions
         self.k = k
         self.cutoff = cutoff
@@ -42,10 +42,8 @@ class ContextEncoder(nn.Module):
         return self.hidden_channels[1]
     
     def forward(self, node_attr, pos, edge_index, edge_feature, annealing=True, attn_bias=None):
-
         edge_vector = pos[edge_index[0]] - pos[edge_index[1]] 
         edge_dist = torch.norm(edge_vector, dim=-1, p=2)     
-        #h = list(node_attr)
         for interaction in self.interactions:
             node_attr = interaction(
                 node_attr, 
